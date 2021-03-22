@@ -1,0 +1,41 @@
+{
+	"info": {
+		"_postman_id": "a6eca880-0658-4faf-910b-4d3956548bbf",
+		"name": "WatchList",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Movie Search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/v1/watch/search?keyword=Avengers&type=tv",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"v1",
+						"watch",
+						"search"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "Avengers"
+						},
+						{
+							"key": "type",
+							"value": "tv",
+							"description": "movie/tv"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
