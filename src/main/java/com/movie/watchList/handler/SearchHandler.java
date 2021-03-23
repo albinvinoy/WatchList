@@ -1,8 +1,8 @@
 package com.movie.watchList.handler;
 
 import com.movie.watchList.application.Constants;
-import com.movie.watchList.handler.client.MovieSearchClientHandler;
-import com.movie.watchList.handler.client.TvShowSearchClientHandler;
+import com.movie.watchList.client.handler.MovieSearchClientHandler;
+import com.movie.watchList.client.handler.TvShowSearchClientHandler;
 import com.movie.watchList.model.MovieApplication;
 import com.movie.watchList.model.controller.SuggestedResponse;
 import lombok.RequiredArgsConstructor;

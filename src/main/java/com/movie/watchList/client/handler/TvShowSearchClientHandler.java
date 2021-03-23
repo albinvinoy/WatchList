@@ -1,4 +1,4 @@
-package com.movie.watchList.handler.client;
+package com.movie.watchList.client.handler;
 
 import com.movie.watchList.client.TvShowSearchClient;
 import com.movie.watchList.model.MovieApplication;

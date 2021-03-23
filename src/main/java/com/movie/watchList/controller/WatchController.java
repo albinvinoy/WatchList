@@ -2,13 +2,15 @@ package com.movie.watchList.controller;
 
 import com.movie.watchList.model.MovieApplication;
 import com.movie.watchList.model.controller.SuggestedResponse;
+import com.movie.watchList.model.controller.incoming.CreateItemRequest;
+import com.movie.watchList.service.CreateContentService;
 import com.movie.watchList.service.SearchService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 @RequiredArgsConstructor
 @RestControllerAdvice
@@ -16,8 +18,9 @@ import reactor.core.publisher.Flux;
 public class WatchController {
 
     private final SearchService searchService;
+    private final CreateContentService createContentService;
 
-    @GetMapping(value = "/search", produces = "application/json")
+    @GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
     public Flux<SuggestedResponse> searchMovies(
             @RequestParam("keyword") String keyword,
             @RequestParam("type") String type
@@ -31,4 +34,17 @@ public class WatchController {
 
         return searchService.getMovieSearchResults(movieApplication);
     }
+
+
+    @PostMapping(value = "/saveMovie", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Mono<Boolean> addToWatchList(
+            @RequestBody() CreateItemRequest createItemRequest
+    ) {
+
+        return Mono.just(createItemRequest)
+                .publishOn(Schedulers.boundedElastic())
+                .flatMap(createContentService::addNewContents);
+    }
+
+
 }
